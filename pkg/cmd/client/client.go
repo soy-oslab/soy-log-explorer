@@ -5,15 +5,18 @@ import (
 	"flag"
 	"fmt"
 	"github.com/smallnest/rpcx/client"
-	"time"
 )
 
 var addr = flag.String("addr", "localhost:8972", "server address")
 
+type esdocs struct {
+	Index string
+	Docs  string
+}
+
 func main() {
 	flag.Parse()
 
-	var args string
 	var reply string
 
 	d, _ := client.NewPeer2PeerDiscovery("tcp@"+*addr, "")
@@ -21,9 +24,9 @@ func main() {
 	xclient := client.NewXClient("Rpush", client.Failtry, client.RandomSelect, d, client.DefaultOption)
 	defer xclient.Close()
 
-	args = fmt.Sprintf(`{ "index": { "hour": %d, "minute": %d, "second": %d } }`, time.Now().Hour(), time.Now().Minute(), time.Now().Second())
+	a := esdocs{Index: "my_index", Docs: `{ "name" : "drop" }`}
 
-	err := xclient.Call(context.Background(), "HotPush", &args, &reply)
+	err := xclient.Call(context.Background(), "HotPush", &a, &reply)
 	if err != nil {
 		fmt.Printf("error: %v\n", err)
 	} else {

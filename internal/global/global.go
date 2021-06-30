@@ -7,6 +7,12 @@ import (
 // RINGSZ is maximum ring size
 const RINGSZ = 10
 
+// ESdocs is protocol for RPC
+type ESdocs struct {
+	Index string
+	Docs  string
+}
+
 // HotRing is for hot port
 var HotRing *ring.Ring
 
