@@ -8,7 +8,7 @@ on:
 
 defaults:
   run:
-    sheel: bash
+    shell: bash
 
 jobs:
   source-archive-gen:
