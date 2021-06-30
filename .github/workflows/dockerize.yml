@@ -24,7 +24,7 @@ jobs:
     - name: Generate Full Source Archive
       run: |
         pip install git-archive-all
-        make gen-src-archive
+	./scripts/soy_log_explorer_gen_src_archive.sh
 
     - name: Create a docker context
       run: |
