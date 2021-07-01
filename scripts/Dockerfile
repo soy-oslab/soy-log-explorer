@@ -1,6 +1,6 @@
 FROM golang:1.16
 
-COPY soy_log_explorer soy_log_explorer
+COPY explorer explorer
 
 RUN apt -qy update && \
 	apt-get -qy \
