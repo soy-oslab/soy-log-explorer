@@ -8,7 +8,7 @@ RUN apt -qy update && \
 		-o "Dpkg::Options::=--force-confold" upgrade && \
 	apt-get -qy autoclean
 
-WORKDIR soy_log_explorer
+WORKDIR explorer
 
 RUN go build -v ./...
 
