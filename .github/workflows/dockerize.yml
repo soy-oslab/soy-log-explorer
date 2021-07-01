@@ -37,8 +37,8 @@ jobs:
     - name: Dockerize bin
       run: |
         docker build \
-          -t "${{ secrets.DOCKER_USERNAME }}"/explorer:latest \
+          -t "${{ secrets.DOCKER_REGISTRY_ENDPOINT }}"/explorer:latest \
           -f scripts/Dockerfile /tmp/dockerize
 
     - name: Push Docker image
-      run: docker push "${{ secrets.DOCKER_USERNAME }}"/explorer
+      run: docker push "${{ secrets.DOCKER_REGISTRY_ENDPOINT }}"/explorer
