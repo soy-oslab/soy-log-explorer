@@ -5,27 +5,25 @@ import (
 	"github.com/soyoslab/soy_log_explorer/internal/global"
 )
 
-func push(args global.ESdocs, hot bool) string {
+func push(data []byte, hot bool) {
 	if hot {
-		global.HotRing.Push(args)
+		global.HotRing.Push(string(data))
 	} else {
-		global.ColdRing.Push(args)
+		global.ColdRing.Push(string(data))
 	}
-
-	return ""
 }
 
 // Rpush is port controller
 type Rpush int
 
 // HotPush is for hot port
-func (t *Rpush) HotPush(ctx context.Context, args *global.ESdocs, reply *string) error {
-	*reply = push(*args, true)
+func (t *Rpush) HotPush(ctx context.Context, args *[]byte, reply *string) error {
+	push(*args, true)
 	return nil
 }
 
 // ColdPush is for cold port
-func (t *Rpush) ColdPush(ctx context.Context, args *global.ESdocs, reply *string) error {
-	*reply = push(*args, false)
+func (t *Rpush) ColdPush(ctx context.Context, args *[]byte, reply *string) error {
+	push(*args, false)
 	return nil
 }
