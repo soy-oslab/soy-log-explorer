@@ -28,8 +28,8 @@ jobs:
 
     - name: Create a docker context
       run: |
-        mkdir -p /tmp/dockerize/soy_log_explorer
-        tar xzf build/soy_log_explorer.src.tar.gz --strip 1 -C /tmp/dockerize/soy_log_explorer
+        mkdir -p /tmp/dockerize/explorer
+        tar xzf build/explorer.src.tar.gz --strip 1 -C /tmp/dockerize/explorer
 
     - name: Log into docker registry
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin "${{ secrets.DOCKER_REGISTRY_ENDPOINT }}"
@@ -37,8 +37,8 @@ jobs:
     - name: Dockerize bin
       run: |
         docker build \
-          -t "${{ secrets.DOCKER_USERNAME }}"/soy_log_explorer:latest \
+          -t "${{ secrets.DOCKER_USERNAME }}"/explorer:latest \
           -f scripts/Dockerfile /tmp/dockerize
 
     - name: Push Docker image
-      run: docker push "${{ secrets.DOCKER_USERNAME }}"/soy_log_explorer
+      run: docker push "${{ secrets.DOCKER_USERNAME }}"/explorer
