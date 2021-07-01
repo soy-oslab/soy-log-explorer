@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 PROJECT=soy_log_explorer
 DEST="build/${PROJECT}.src.tar.gz"
