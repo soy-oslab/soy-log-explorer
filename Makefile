@@ -18,5 +18,5 @@ explorer-build:
 
 .PHONY: gen-src-archive
 gen-src-archive:
-	@echo "## soy_log_explorer: make gen-src-archive"
-	./scripts/soy_log_explorer_gen_src_archive.sh
+	@echo "## explorer: make gen-src-archive"
+	./scripts/explorer_gen_src_archive.sh

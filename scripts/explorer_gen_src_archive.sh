@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-PROJECT=soy_log_explorer
+PROJECT=explorer
 DEST="build/${PROJECT}.src.tar.gz"
 
 # Check that git-archive-all is installed
@@ -11,7 +11,7 @@ if ! git-archive-all --help &> /dev/null; then
 fi
 
 mkdir build
-git-archive-all --prefix="soy_log_explorer" --force-submodules $DEST
+git-archive-all --prefix="explorer" --force-submodules $DEST
 
 echo "# $0: DONE!"
 ls -lh $DEST
