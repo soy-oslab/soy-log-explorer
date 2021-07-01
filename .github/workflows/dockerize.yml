@@ -37,8 +37,8 @@ jobs:
     - name: Dockerize bin
       run: |
         docker build \
-          -t suhoson/soy_log_explorer:latest \
+          -t "${{ secrets.DOCKER_USERNAME }}"/soy_log_explorer:latest \
           -f scripts/Dockerfile /tmp/dockerize
 
     - name: Push Docker image
-      run: docker push suhoson/soy_log_explorer
+      run: docker push "${{ secrets.DOCKER_USERNAME }}"/soy_log_explorer
