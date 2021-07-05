@@ -33,16 +33,19 @@ func main() {
 	var buf bytes.Buffer
 
 	enc := gob.NewEncoder(&buf)
-	err1 := enc.Encode(docs)
-	if err1 != nil {
-		fmt.Printf("error1: %v\n", err1)
+	err := enc.Encode(docs)
+	if err != nil {
+		fmt.Printf("error1: %v\n", err)
 		return
 	}
 
 	c := &compressor.GzipComp{}
-	data := c.Compress(buf.Bytes())
+	data, err := c.Compress(buf.Bytes())
+	if err != nil {
+		fmt.Printf("error: %v\n", err)
+	}
 
-	err := xclient.Call(context.Background(), "HotPush", &data, &reply)
+	err = xclient.Call(context.Background(), "HotPush", &data, &reply)
 	if err != nil {
 		fmt.Printf("error: %v\n", err)
 	} else {

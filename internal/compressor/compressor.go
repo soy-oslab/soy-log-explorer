@@ -19,7 +19,7 @@ func DocsCompress(docs global.ESdocs) ([]byte, error) {
 	}
 
 	c := &compressor.GzipComp{}
-	return c.Compress(buf.Bytes()), nil
+	return c.Compress(buf.Bytes())
 }
 
 // DocsDecompress does decompress []byte to ESdocs
@@ -27,14 +27,14 @@ func DocsDecompress(b []byte) (global.ESdocs, error) {
 	var docs global.ESdocs
 
 	c := &compressor.GzipComp{}
-	data := c.Decompress(b)
-
-	buf := bytes.NewBuffer(data)
-	dec := gob.NewDecoder(buf)
-	err := dec.Decode(&docs)
+	data, err := c.Decompress(b)
 	if err != nil {
 		return docs, err
 	}
+
+	buf := bytes.NewBuffer(data)
+	dec := gob.NewDecoder(buf)
+	err = dec.Decode(&docs)
 
 	return docs, nil
 }
