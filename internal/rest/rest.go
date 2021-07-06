@@ -19,6 +19,7 @@ func ESPush(v ...interface{}) {
 	if err != nil {
 		return
 	}
+	// ramdisk
 	resty.New().R().
 		SetHeader("Content-Type", "application/json").
 		SetBody(docs.Docs).

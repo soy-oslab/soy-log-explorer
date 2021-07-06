@@ -3,11 +3,11 @@ package compressor
 import (
 	"testing"
 
-	"github.com/soyoslab/soy_log_explorer/internal/global"
+	"github.com/soyoslab/soy_log_explorer/pkg/esdocs"
 )
 
 func TestCompress(t *testing.T) {
-	docs := global.ESdocs{Index: "my_index", Docs: `{"name":"hong"}`}
+	docs := esdocs.ESdocs{Index: "my_index", Docs: `{"name":"hong"}`}
 
 	b, err := DocsCompress(docs)
 	if err != nil {

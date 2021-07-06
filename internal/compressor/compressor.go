@@ -4,12 +4,12 @@ import (
 	"bytes"
 	"encoding/gob"
 
-	"github.com/soyoslab/soy_log_explorer/internal/global"
+	"github.com/soyoslab/soy_log_explorer/pkg/esdocs"
 	"github.com/soyoslab/soy_log_generator/pkg/compressor"
 )
 
 // DocsCompress does compress ESdocs to []byte
-func DocsCompress(docs global.ESdocs) ([]byte, error) {
+func DocsCompress(docs esdocs.ESdocs) ([]byte, error) {
 	var buf bytes.Buffer
 
 	enc := gob.NewEncoder(&buf)
@@ -23,8 +23,8 @@ func DocsCompress(docs global.ESdocs) ([]byte, error) {
 }
 
 // DocsDecompress does decompress []byte to ESdocs
-func DocsDecompress(b []byte) (global.ESdocs, error) {
-	var docs global.ESdocs
+func DocsDecompress(b []byte) (esdocs.ESdocs, error) {
+	var docs esdocs.ESdocs
 
 	c := &compressor.GzipComp{}
 	data, err := c.Decompress(b)
