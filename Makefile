@@ -1,6 +1,7 @@
 GOBIN=go
 GORUN=$(GOBIN) run
 GOBUILD=$(GOBIN) build
+GOTEST=$(GOBIN) test
 
 BINPATH=$(shell pwd)/bin
 
@@ -20,3 +21,7 @@ explorer-build:
 gen-src-archive:
 	@echo "## explorer: make gen-src-archive"
 	./scripts/explorer_gen_src_archive.sh
+
+codacy-coverage-push:
+	$(GOTEST) -coverprofile=coverage.out ./...
+	bash scripts/get.sh report --force-coverage-parser go -r ./coverage.out
