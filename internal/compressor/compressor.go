@@ -3,6 +3,7 @@ package compressor
 import (
 	"bytes"
 	"encoding/gob"
+	"errors"
 
 	"github.com/soyoslab/soy_log_explorer/pkg/esdocs"
 	"github.com/soyoslab/soy_log_generator/pkg/compressor"
@@ -26,6 +27,10 @@ func DocsCompress(docs esdocs.ESdocs) ([]byte, error) {
 func DocsDecompress(b []byte) (esdocs.ESdocs, error) {
 	var docs esdocs.ESdocs
 
+	if b == nil {
+		return docs, errors.New("Null byte array")
+	}
+
 	c := &compressor.GzipComp{}
 	data, err := c.Decompress(b)
 	if err != nil {
@@ -36,5 +41,5 @@ func DocsDecompress(b []byte) (esdocs.ESdocs, error) {
 	dec := gob.NewDecoder(buf)
 	err = dec.Decode(&docs)
 
-	return docs, nil
+	return docs, err
 }

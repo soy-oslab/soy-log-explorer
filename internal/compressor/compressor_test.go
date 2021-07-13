@@ -9,6 +9,15 @@ import (
 func TestCompress(t *testing.T) {
 	docs := esdocs.ESdocs{Index: "my_index", Docs: `{"name":"hong"}`}
 
+	_, err := DocsCompress(docs)
+	if err != nil {
+		t.Error(err)
+	}
+}
+
+func TestDecompress(t *testing.T) {
+	docs := esdocs.ESdocs{Index: "my_index", Docs: `{"name":"hong"}`}
+
 	b, err := DocsCompress(docs)
 	if err != nil {
 		t.Error(err)
@@ -25,5 +34,10 @@ func TestCompress(t *testing.T) {
 
 	if docs.Docs != ret.Docs {
 		t.Error("Docs is different!")
+	}
+
+	_, err = DocsDecompress(nil)
+	if err == nil {
+		t.Error("Decompressed with no data")
 	}
 }

@@ -1,8 +1,9 @@
 package deamon
 
 import (
-	"github.com/soyoslab/soy_log_collector/pkg/container/ring"
 	"time"
+
+	"github.com/soyoslab/soy_log_collector/pkg/container/ring"
 )
 
 // Listen does background jobs

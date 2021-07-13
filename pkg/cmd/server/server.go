@@ -2,9 +2,10 @@ package server
 
 import (
 	"flag"
+	"os"
+
 	"github.com/smallnest/rpcx/server"
 	"github.com/soyoslab/soy_log_explorer/internal/port"
-	"os"
 )
 
 // Execute runs the server
