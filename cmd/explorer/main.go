@@ -4,7 +4,7 @@ import (
 	"github.com/soyoslab/soy_log_explorer/internal/global"
 	"github.com/soyoslab/soy_log_explorer/internal/rest"
 	"github.com/soyoslab/soy_log_explorer/pkg/cmd/server"
-	"github.com/soyoslab/soy_log_explorer/pkg/deamon"
+	deamon "github.com/soyoslab/soy_log_explorer/pkg/daemon"
 )
 
 func main() {
