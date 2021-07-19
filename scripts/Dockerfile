@@ -9,6 +9,8 @@ RUN apt-get -qy \
 
 WORKDIR /go/explorer
 
+ENV EXPLORER_PORT 8972
+
 RUN go build -v ./...
 
 CMD ["bash"]
