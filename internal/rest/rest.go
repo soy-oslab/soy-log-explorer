@@ -3,6 +3,7 @@ package rest
 import (
 	"errors"
 	"log"
+	"strings"
 
 	"github.com/go-resty/resty/v2"
 	"github.com/soyoslab/soy_log_explorer/internal/compressor"
@@ -33,7 +34,7 @@ func ESPush(docs esdocs.ESdocs) {
 	resty.New().R().
 		SetHeader("Content-Type", "application/json").
 		SetBody(docs.Docs).
-		Post("http://localhost:9200/" + docs.Index + "/_doc")
+		Post("http://localhost:9200/" + strings.ToLower(docs.Index) + "/_doc")
 }
 
 // ESPushHot push the documents to elasticsearch for Hot data

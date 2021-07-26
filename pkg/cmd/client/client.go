@@ -9,15 +9,11 @@ import (
 	"os"
 
 	"github.com/smallnest/rpcx/client"
+	"github.com/soyoslab/soy_log_explorer/pkg/esdocs"
 	"github.com/soyoslab/soy_log_generator/pkg/compressor"
 )
 
 var addr = flag.String("addr", "localhost:"+os.Getenv("EXPLORER_PORT"), "server address")
-
-type esdocs struct {
-	Index string
-	Docs  string
-}
 
 func main() {
 	flag.Parse()
@@ -29,7 +25,7 @@ func main() {
 	xclient := client.NewXClient("Rpush", client.Failtry, client.RandomSelect, d, client.DefaultOption)
 	defer xclient.Close()
 
-	docs := esdocs{Index: "my_index", Docs: `{"name":"steels"}`}
+	docs := esdocs.ESdocs{Index: "application1", Docs: `{"File2_2021-07-26_06_35_33_850136975":"hello"}`}
 	var buf bytes.Buffer
 
 	err := xclient.Call(context.Background(), "HotPush", &docs, &reply)
