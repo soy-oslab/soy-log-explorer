@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	go deamon.Listen(global.HotRing, rest.ESPush, 1)
-	go deamon.Listen(global.ColdRing, rest.ESPush, 2)
+	go deamon.Listen(global.HotRing, rest.ESPushHot, 1)
+	go deamon.Listen(global.ColdRing, rest.ESPushCold, 2)
 	server.Execute()
 }

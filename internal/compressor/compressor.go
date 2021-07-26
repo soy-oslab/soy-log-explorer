@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/gob"
 	"errors"
+	"log"
 
 	"github.com/soyoslab/soy_log_explorer/pkg/esdocs"
 	"github.com/soyoslab/soy_log_generator/pkg/compressor"
@@ -16,6 +17,7 @@ func DocsCompress(docs esdocs.ESdocs) ([]byte, error) {
 	enc := gob.NewEncoder(&buf)
 	err := enc.Encode(docs)
 	if err != nil {
+		log.Println("[Error] Can't encode data")
 		return nil, err
 	}
 
@@ -34,6 +36,7 @@ func DocsDecompress(b []byte) (esdocs.ESdocs, error) {
 	c := &compressor.GzipComp{}
 	data, err := c.Decompress(b)
 	if err != nil {
+		log.Println("[Error] Can't decompress data")
 		return docs, err
 	}
 

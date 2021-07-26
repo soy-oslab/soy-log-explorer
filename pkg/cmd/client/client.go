@@ -29,11 +29,18 @@ func main() {
 	xclient := client.NewXClient("Rpush", client.Failtry, client.RandomSelect, d, client.DefaultOption)
 	defer xclient.Close()
 
-	docs := esdocs{Index: "my_index", Docs: `{"name":"kai"}`}
+	docs := esdocs{Index: "my_index", Docs: `{"name":"steels"}`}
 	var buf bytes.Buffer
 
+	err := xclient.Call(context.Background(), "HotPush", &docs, &reply)
+	if err != nil {
+		fmt.Printf("error: %v\n", err)
+	} else {
+		fmt.Printf("[Hot] reply: %s\n", reply)
+	}
+
 	enc := gob.NewEncoder(&buf)
-	err := enc.Encode(docs)
+	err = enc.Encode(docs)
 	if err != nil {
 		fmt.Printf("error1: %v\n", err)
 		return
@@ -45,10 +52,10 @@ func main() {
 		fmt.Printf("error: %v\n", err)
 	}
 
-	err = xclient.Call(context.Background(), "HotPush", &data, &reply)
+	err = xclient.Call(context.Background(), "ColdPush", &data, &reply)
 	if err != nil {
 		fmt.Printf("error: %v\n", err)
 	} else {
-		fmt.Printf("reply: %s\n", reply)
+		fmt.Printf("[Cold] reply: %s\n", reply)
 	}
 }

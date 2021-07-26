@@ -15,5 +15,6 @@ func TestESPush(t *testing.T) {
 		t.Error(err)
 	}
 
-	ESPush(string(b))
+	ESPushHot(docs)
+	ESPushCold(string(b))
 }

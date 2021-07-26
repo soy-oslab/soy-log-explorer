@@ -11,12 +11,7 @@ func TestHotPush(t *testing.T) {
 	docs := esdocs.ESdocs{Index: "my_index", Docs: `{"name":"Hotname"}`}
 	var reply string
 
-	b, err := compressor.DocsCompress(docs)
-	if err != nil {
-		t.Error(err)
-	}
-
-	new(Rpush).HotPush(nil, &b, &reply)
+	new(Rpush).HotPush(nil, &docs, &reply)
 
 	if reply != "" {
 		t.Error("reply error")
