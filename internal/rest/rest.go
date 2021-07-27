@@ -33,10 +33,10 @@ func getBytes(v interface{}) []byte {
 func ESPush(docs esdocs.ESdocs) {
 	// ramdisk
 
-	docsString := strings.ToLower(docs.Docs)
+	docsIndex := strings.ToLower(docs.Index)
 	var logarr []map[string]string
 
-	err := json.Unmarshal([]byte(docsString), &logarr)
+	err := json.Unmarshal([]byte(docs.Docs), &logarr)
 	if err != nil {
 		log.Println("[Erorr] Can't convert to json")
 		return
@@ -46,7 +46,7 @@ func ESPush(docs esdocs.ESdocs) {
 		resty.New().R().
 			SetHeader("Content-Type", "application/json").
 			SetBody(logarr[log]).
-			Post("http://localhost:9200/" + strings.ToLower(docs.Index) + "/_doc")
+			Post("http://localhost:9200/" + docsIndex + "/_doc")
 	}
 }
 
