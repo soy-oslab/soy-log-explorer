@@ -1,6 +1,7 @@
 package rest
 
 import (
+	"encoding/json"
 	"errors"
 	"log"
 	"strings"
@@ -31,10 +32,22 @@ func getBytes(v interface{}) []byte {
 // ESPush push the documents to elasticsearch
 func ESPush(docs esdocs.ESdocs) {
 	// ramdisk
-	resty.New().R().
-		SetHeader("Content-Type", "application/json").
-		SetBody(docs.Docs).
-		Post("http://localhost:9200/" + strings.ToLower(docs.Index) + "/_doc")
+
+	docsString := strings.ToLower(docs.Docs)
+	var logarr []map[string]string
+
+	err := json.Unmarshal([]byte(docsString), &logarr)
+	if err != nil {
+		log.Println("[Erorr] Can't convert to json")
+		return
+	}
+
+	for log := range logarr {
+		resty.New().R().
+			SetHeader("Content-Type", "application/json").
+			SetBody(logarr[log]).
+			Post("http://localhost:9200/" + strings.ToLower(docs.Index) + "/_doc")
+	}
 }
 
 // ESPushHot push the documents to elasticsearch for Hot data

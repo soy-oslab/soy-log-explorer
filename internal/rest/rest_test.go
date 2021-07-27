@@ -8,7 +8,7 @@ import (
 )
 
 func TestESPush(t *testing.T) {
-	docs := esdocs.ESdocs{Index: "my_index", Docs: `{"name":"Gomez"}`}
+	docs := esdocs.ESdocs{Index: "my_index", Docs: `[{"name":"Gomez"}]`}
 
 	b, err := compressor.DocsCompress(docs)
 	if err != nil {
