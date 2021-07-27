@@ -13,7 +13,7 @@ import (
 	"github.com/soyoslab/soy_log_generator/pkg/compressor"
 )
 
-var addr = flag.String("addr", "localhost:"+os.Getenv("EXPLORER_PORT"), "server address")
+var addr = flag.String("addr", os.Getenv("EXPLORER_HOST")+":"+os.Getenv("EXPLORER_PORT"), "server address")
 
 func main() {
 	flag.Parse()

@@ -10,7 +10,7 @@ import (
 
 // Execute runs the server
 func Execute() {
-	var addr = flag.String("addr", "0.0.0.0:"+os.Getenv("EXPLORER_PORT"), "server address")
+	var addr = flag.String("addr", os.Getenv("EXPLORER_HOST")+":"+os.Getenv("EXPLORER_PORT"), "server address")
 
 	s := server.NewServer()
 	s.Register(new(port.Rpush), "")
