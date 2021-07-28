@@ -3,7 +3,9 @@ package rest
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"log"
+	"os"
 	"strings"
 
 	"github.com/go-resty/resty/v2"
@@ -46,7 +48,8 @@ func ESPush(docs esdocs.ESdocs) {
 		resty.New().R().
 			SetHeader("Content-Type", "application/json").
 			SetBody(logarr[log]).
-			Post("http://localhost:9200/" + docsIndex + "/_doc")
+			Post(fmt.Sprintf("http://%s:%s/%s/_doc",
+				os.Getenv("ES_HOST"), os.Getenv("ES_PORT"), docsIndex))
 	}
 }
 

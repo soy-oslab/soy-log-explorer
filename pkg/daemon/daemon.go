@@ -12,9 +12,11 @@ import (
 // duration: sleep every x period(sec)
 func Listen(ring *ring.Ring, fn func(...interface{}), duration time.Duration) {
 	for true {
-		next, err := ring.Pop()
-		if err == nil {
-			fn(next)
+		for true {
+			next, err := ring.Pop()
+			if err == nil {
+				fn(next)
+			}
 		}
 		time.Sleep(time.Second * duration)
 	}
