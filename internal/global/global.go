@@ -5,7 +5,7 @@ import (
 )
 
 // RINGSZ is maximum ring size
-const RINGSZ = 10
+const RINGSZ = 100
 
 // HotRing is for hot port
 var HotRing *ring.Ring

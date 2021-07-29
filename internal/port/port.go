@@ -6,6 +6,7 @@ import (
 
 	"github.com/soyoslab/soy_log_explorer/internal/global"
 	"github.com/soyoslab/soy_log_explorer/pkg/esdocs"
+	"github.com/soyoslab/soy_log_explorer/pkg/signal"
 )
 
 // Rpush is port controller
@@ -14,6 +15,7 @@ type Rpush int
 // HotPush is for hot port
 func (t *Rpush) HotPush(ctx context.Context, args *esdocs.ESdocs, reply *string) error {
 	err := global.HotRing.Push(*args)
+	signal.Signal()
 	if err != nil {
 		return errors.New("hotport is full")
 	}
