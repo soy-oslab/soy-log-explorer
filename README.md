@@ -5,3 +5,10 @@
 ![build](https://github.com/soyoslab/soy_log_explorer/actions/workflows/linux-build-test.yml/badge.svg)
 ![dockerize](https://github.com/soyoslab/soy_log_explorer/actions/workflows/dockerize.yml/badge.svg)
 ![coverage](https://github.com/soyoslab/soy_log_explorer/actions/workflows/coverage.yml/badge.svg)
+
+```
+export EXPLORER_HOST = 0.0.0.0
+export EXPLORER_PORT = 8972
+export ES_HOST = x.x.x.x
+export ES_PORT = 9200
+```
