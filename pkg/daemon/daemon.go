@@ -24,7 +24,9 @@ func Listen(ring *ring.Ring, fn func(...interface{}), duration time.Duration) {
 			} else {
 				break
 			}
-			time.Sleep(time.Millisecond * duration)
+			if duration != 0 {
+				time.Sleep(time.Millisecond * duration)
+			}
 		}
 	}
 }
