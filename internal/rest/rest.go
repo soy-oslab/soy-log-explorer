@@ -44,12 +44,21 @@ func ESPush(docs esdocs.ESdocs) {
 		return
 	}
 
+	esHost := os.Getenv("ES_HOST")
+	if esHost == "" {
+		esHost = "localhost"
+	}
+	esPort := os.Getenv("ES_PORT")
+	if esPort == "" {
+		esPort = "9200"
+	}
+
 	for log := range logarr {
 		resty.New().R().
 			SetHeader("Content-Type", "application/json").
 			SetBody(logarr[log]).
 			Post(fmt.Sprintf("http://%s:%s/%s/_doc",
-				os.Getenv("ES_HOST"), os.Getenv("ES_PORT"), docsIndex))
+				esHost, esPort, docsIndex))
 	}
 }
 
