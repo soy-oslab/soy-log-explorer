@@ -6,9 +6,42 @@
 ![dockerize](https://github.com/soyoslab/soy_log_explorer/actions/workflows/dockerize.yml/badge.svg)
 ![coverage](https://github.com/soyoslab/soy_log_explorer/actions/workflows/coverage.yml/badge.svg)
 
+## Introduction
+
+This project sends the messages got from soy_log_collector to Elasticsearch.
+The internal process is below.
+1. Classifies messages received from soy_log_collector according to hot/cold and pushes them to the corresponding queue.
+2. Background daemon pops the message from the queue and unzips it.
+3. Send the unzipped message to Elasticsearch using REST API.
+
+## Installation
+
+```bash
+$ git clone https://github.com/soyoslab/soy_log_explorer.git
+$ cd soy_log_explorer
 ```
-export EXPLORER_HOST = 0.0.0.0
-export EXPLORER_PORT = 8972
-export ES_HOST = x.x.x.x
-export ES_PORT = 9200
+
+## Usage
+
+Set enviroment variables:
+```bash
+$ export EXPLORER_HOST = 0.0.0.0   # Server IP Address
+$ export EXPLORER_PORT = 8972      # Server Port
+$ export ES_HOST = x.x.x.x         # Elasticsearch IP Address
+$ export ES_PORT = 9200            # Elasticsearch Port
+```
+
+If you did not set the environment variables, soy_log_explorer uses default values.
+
+Default environment variables:
+```
+EXPLORER_HOST = 0.0.0.0
+EXPLORER_PORT = 8972
+ES_HOST = localhost
+ES_PORT = 9200
+```
+
+Run soy_log_explorer:
+```bash
+$ go run cmd/explorer/main.go
 ```
