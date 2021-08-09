@@ -28,8 +28,3 @@ jobs:
 
     - name: Test
       run: go test -v ./...
-
-    - name: Send Coverage
-      run: make codacy-coverage-push
-      env:
-        CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
