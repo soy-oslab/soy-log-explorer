@@ -1,11 +1,11 @@
 package global
 
 import (
+	"os"
+	"strconv"
+
 	"github.com/soyoslab/soy_log_collector/pkg/container/ring"
 )
-
-// RINGSZ is maximum ring size
-const RINGSZ = 1000
 
 // HotRing is for hot port
 var HotRing *ring.Ring
@@ -14,6 +14,7 @@ var HotRing *ring.Ring
 var ColdRing *ring.Ring
 
 func init() {
-	HotRing = ring.New(RINGSZ)
-	ColdRing = ring.New(RINGSZ)
+	RINGSZ, _ := strconv.ParseInt(os.Getenv("EXPLORER_RINGSZ"), 10, 32)
+	HotRing = ring.New(int(RINGSZ))
+	ColdRing = ring.New(int(RINGSZ))
 }
