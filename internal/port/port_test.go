@@ -8,7 +8,7 @@ import (
 )
 
 func TestHotPush(t *testing.T) {
-	docs := esdocs.ESdocs{Index: "my_index", Docs: `{"name":"Hotname"}`}
+	docs := esdocs.ESdocs{Index: "my_index", Docs: `[{"name":"Hotname"}]`}
 	var reply string
 
 	new(Rpush).HotPush(nil, &docs, &reply)
@@ -19,7 +19,7 @@ func TestHotPush(t *testing.T) {
 }
 
 func TestColdPush(t *testing.T) {
-	docs := esdocs.ESdocs{Index: "my_index", Docs: `{"name":"Coldname"}`}
+	docs := esdocs.ESdocs{Index: "my_index", Docs: `[{"name":"Coldname"}]`}
 	var reply string
 
 	b, err := compressor.DocsCompress(docs)

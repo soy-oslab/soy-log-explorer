@@ -13,9 +13,7 @@ import (
 // duration: sleep every x period(milli)
 func Listen(ring *ring.Ring, fn func(...interface{}), duration time.Duration) {
 	for true {
-		if duration == 0 {
-			signal.Wait()
-		}
+		signal.Wait()
 
 		for true {
 			next, err := ring.Pop()
@@ -23,9 +21,6 @@ func Listen(ring *ring.Ring, fn func(...interface{}), duration time.Duration) {
 				fn(next)
 			} else {
 				break
-			}
-			if duration != 0 {
-				time.Sleep(time.Millisecond * duration)
 			}
 		}
 	}

@@ -30,7 +30,6 @@ $ export EXPLORER_PORT = 8972         # Server Port
 $ export ES_HOST = x.x.x.x            # Elasticsearch IP Address
 $ export ES_PORT = 9200               # Elasticsearch Port
 $ export EXPLORER_RINGSZ = 10000      # Maximum Ring Size
-$ export EXPLORER_COLD_TIMEOUT = 1000 # Cold Ring Timeout
 ```
 
 If you did not set the environment variables, soy_log_explorer uses default values.

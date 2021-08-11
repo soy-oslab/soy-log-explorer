@@ -62,16 +62,6 @@ func ESPush(docs esdocs.ESdocs) {
 	}
 }
 
-// ESPushHot push the documents to elasticsearch for Hot data
-func ESPushHot(v ...interface{}) {
-	docs, err := getESdocs(v[0])
-	if err != nil {
-		log.Println("[Erorr] Can't decode data")
-		return
-	}
-	ESPush(docs)
-}
-
 // ESPushCold push the documents to elasticsearch for Cold data
 func ESPushCold(v ...interface{}) {
 	docs, err := compressor.DocsDecompress(getBytes(v[0]))
