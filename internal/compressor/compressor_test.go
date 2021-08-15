@@ -41,3 +41,12 @@ func TestDecompress(t *testing.T) {
 		t.Error("Decompressed with no data")
 	}
 }
+
+func TestDecompressFailed(t *testing.T) {
+	b := []byte("")
+
+	_, err := DocsDecompress(b)
+	if err == nil {
+		t.Error(err)
+	}
+}

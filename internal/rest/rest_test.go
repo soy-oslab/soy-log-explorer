@@ -18,3 +18,15 @@ func TestESPush(t *testing.T) {
 	ESPush(docs)
 	ESPushCold(string(b))
 }
+
+func TestESPushFailed(t *testing.T) {
+	esdocs := esdocs.ESdocs{}
+	esdocs.Docs = "{;l;23;"
+	ESPush(esdocs)
+	ESPushCold(esdocs)
+}
+
+func TestGetEsdocs(t *testing.T) {
+	getESdocs(esdocs.ESdocs{})
+	getESdocs("")
+}

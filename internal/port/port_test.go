@@ -3,7 +3,10 @@ package port
 import (
 	"testing"
 
+	"github.com/soyoslab/soy_log_collector/pkg/container/ring"
+
 	"github.com/soyoslab/soy_log_explorer/internal/compressor"
+	"github.com/soyoslab/soy_log_explorer/internal/global"
 	"github.com/soyoslab/soy_log_explorer/pkg/esdocs"
 )
 
@@ -27,9 +30,18 @@ func TestColdPush(t *testing.T) {
 		t.Error(err)
 	}
 
-	new(Rpush).ColdPush(nil, &b, &reply)
+	global.ColdRing = ring.New(0)
 
+	new(Rpush).ColdPush(nil, &b, &reply)
 	if reply != "" {
 		t.Error("reply error")
 	}
+
+	global.ColdRing = ring.New(10)
+
+	new(Rpush).ColdPush(nil, &b, &reply)
+	if reply != "" {
+		t.Error("reply error")
+	}
+
 }
