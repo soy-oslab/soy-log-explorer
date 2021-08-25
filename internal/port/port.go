@@ -23,7 +23,6 @@ func (t *Rpush) HotPush(ctx context.Context, args *esdocs.ESdocs, reply *string)
 
 // ColdPush is for cold port
 func (t *Rpush) ColdPush(ctx context.Context, args *[]byte, reply *string) error {
-	fmt.Println("Cold", string(*args))
 	err := global.ColdRing.Push(string(*args))
 	signal.Signal()
 	if err != nil {

@@ -55,11 +55,12 @@ func ESPush(docs esdocs.ESdocs) {
 
 	for log := range logarr {
 		fmt.Println(logarr[log])
-		resty.New().R().
+		a, b := resty.New().R().
 			SetHeader("Content-Type", "application/json").
 			SetBody(logarr[log]).
 			Post(fmt.Sprintf("http://%s:%s/%s/_doc",
 				esHost, esPort, docsIndex))
+		fmt.Println(a, b)
 	}
 }
 
