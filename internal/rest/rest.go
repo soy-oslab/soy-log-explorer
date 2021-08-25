@@ -54,6 +54,7 @@ func ESPush(docs esdocs.ESdocs) {
 	}
 
 	for log := range logarr {
+		fmt.Println(logarr[log])
 		resty.New().R().
 			SetHeader("Content-Type", "application/json").
 			SetBody(logarr[log]).
